@@ -13,27 +13,27 @@ public class App {
 		while (true) {
 			System.out.println("\n1. Inserir Tarefa");
 			System.out.println("2. Listar Todas as Tarefas");
-			System.out.println("3. Listar Tarefas ConluÌdas");
+			System.out.println("3. Listar Tarefas Conlu√≠das");
 			System.out.println("4. Listar Tarefas Pendentes");
 			System.out.println("5. Concluir uma tarefa");
 			System.out.println("6. Excluir uma tarefa");
 			System.out.println("7. Excluir Todas as Tarefas");
 			System.out.println("8. Sair");
-			System.out.println("Escolha uma opÁ„o:");
+			System.out.println("Escolha uma op√ß√£o:");
 			int opcao = scanner.nextInt();
 			scanner.nextLine();
 				
 				switch (opcao) {
 				case 1:
-					System.out.print("TÌtulo: ");
+					System.out.print("T√≠tulo: ");
 					String titulo = scanner.nextLine();
-					System.out.print("DescriÁ„o: ");
+					System.out.print("Descri√ß√£o: ");
 					String descricao = scanner.nextLine();
 					gerenciador.adicionarTarefa(new Tarefa(titulo, descricao));
 					break;
 					case 2:
 						for (Tarefa t : gerenciador.listarTodas()) {
-							System.out.println(t.getTitulo() + " - " + (t.isConcluida() ? "ConcluÌda" : "Pendente"));
+							System.out.println(t.getTitulo() + " - " + (t.isConcluida() ? "Conclu√≠da" : "Pendente"));
 						}
 						break;
 					case 3:
@@ -65,7 +65,7 @@ public class App {
 						scanner.close();
 						return;
 					default:
-						System.out.println("OpÁ„o inv·lida!");
+						System.out.println("Op√ß√£o inv√°lida!");
 			}
 		}
 	}
