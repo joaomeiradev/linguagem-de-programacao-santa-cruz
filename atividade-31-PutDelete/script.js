@@ -1,5 +1,3 @@
-/* script.js atualizado: inclui botões Editar/Excluir e integra métodos PUT e DELETE */
-
 document.addEventListener('DOMContentLoaded', () => {
     carregarAulas();
 
@@ -7,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        // Se o formulário está em modo de edição (possui data-editing-id), faz PUT; caso contrário, faz POST
         if (form.dataset.editingId) {
             await atualizarAula(form.dataset.editingId);
         } else {
@@ -16,9 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-/* --------------------------------------------------------------------
-   GET – Carrega e renderiza todas as aulas
-   ------------------------------------------------------------------*/
 async function carregarAulas() {
     try {
         const response = await fetch('http://localhost:3000/aulas');
@@ -26,7 +20,6 @@ async function carregarAulas() {
 
         const container = document.getElementById('aulas-container');
 
-        // Renderiza cada aula com botões de ação
         container.innerHTML = aulas
             .map(
                 (aula) => `
@@ -40,14 +33,13 @@ async function carregarAulas() {
             )
             .join('');
 
-        // Liga os eventos dos botões após a renderização
         container.querySelectorAll('.btn-edit').forEach((btn) => {
             btn.addEventListener('click', () => {
                 const card = btn.closest('.card');
                 const id = card.dataset.id;
                 document.getElementById('text').value = card.querySelector('h3').textContent;
                 document.getElementById('content').value = card.querySelector('p').textContent;
-                document.getElementById('form-aula').dataset.editingId = id; // marca formulário em modo edição
+                document.getElementById('form-aula').dataset.editingId = id; 
             });
         });
 
@@ -62,9 +54,6 @@ async function carregarAulas() {
     }
 }
 
-/* --------------------------------------------------------------------
-   POST – Adiciona uma nova aula
-   ------------------------------------------------------------------*/
 async function adicionarAula() {
     const title = document.getElementById('text').value.trim();
     const content = document.getElementById('content').value.trim();
@@ -97,9 +86,6 @@ async function adicionarAula() {
     }
 }
 
-/* --------------------------------------------------------------------
-   PUT – Atualiza uma aula existente
-   ------------------------------------------------------------------*/
 async function atualizarAula(id) {
     const title = document.getElementById('text').value.trim();
     const content = document.getElementById('content').value.trim();
@@ -132,9 +118,6 @@ async function atualizarAula(id) {
     }
 }
 
-/* --------------------------------------------------------------------
-   DELETE – Remove uma aula
-   ------------------------------------------------------------------*/
 async function excluirAula(id) {
     if (!confirm('Tem certeza de que deseja excluir esta aula?')) return;
 
